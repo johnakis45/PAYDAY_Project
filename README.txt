@@ -1,4 +1,4 @@
-This game was developed in Intellij IDEA./last updated January 2021
+This game was developed on Intellij IDEA./last updated January 2021
 
 Instructions:
 1.Open the IDE (Intellij IDEA)
