@@ -1,0 +1,69 @@
+@startuml
+class Model.position.Buyer {
+}
+abstract class Model.position.OnePlayerPos {
+}
+abstract class Model.position.Position {
+- int index
+- String image
+- String dayname
++ void setIndex(int)
++ int getIndex()
++ String getImage()
++ void setDay(String)
++ String getDay()
++ boolean isSunday()
++ boolean isThursday()
++ {abstract}void performAction(Player)
+}
+abstract class Model.position.TwoPlayerPos {
++ {abstract}boolean PerformAction(Player,int,int)
+}
+class Model.position.PayDayPosition {
++ void performAction(Player)
+}
+class Model.position.StartPosition {
++ void performAction(Player)
+}
+abstract class Model.position.DicePosition {
++ void performAction(Player)
+}
+class Model.position.CardPosition {
+- boolean drawonecard
+- boolean deal
++ boolean getOneCard()
++ boolean isDeal()
++ void performAction(Player)
+}
+class Model.position.radiocontest {
++ boolean PerformAction(Player,int,int)
+}
+class Model.position.Sale {
++ void performAction(Player)
+}
+class Model.position.sweepstakes {
++ void performAction(Player)
+}
+class Model.position.lottery {
++ boolean PerformAction(Player,int,int)
+}
+class Model.position.casino {
+- boolean win
++ void PerformAction(Player,jackpot)
++ boolean isWin(int)
+}
+
+
+Model.position.OnePlayerPos <|-- Model.position.Buyer
+Model.position.DicePosition <|-- Model.position.OnePlayerPos
+Model.position.DicePosition <|-- Model.position.TwoPlayerPos
+Model.position.Position <|-- Model.position.PayDayPosition
+Model.position.Position <|-- Model.position.StartPosition
+Model.position.Position <|-- Model.position.DicePosition
+Model.position.Position <|-- Model.position.CardPosition
+Model.position.TwoPlayerPos <|-- Model.position.radiocontest
+Model.position.OnePlayerPos <|-- Model.position.Sale
+Model.position.OnePlayerPos <|-- Model.position.sweepstakes
+Model.position.TwoPlayerPos <|-- Model.position.lottery
+Model.position.OnePlayerPos <|-- Model.position.casino
+@enduml

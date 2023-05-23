@@ -1,0 +1,58 @@
+@startuml
+class Model.cards.TakefromNeighbor {
++ <<Create>> TakefromNeighbor(String,String,String,int)
++ void PerformAction(Player)
+}
+abstract class Model.cards.MailCard {
+- String buttonmsg
++ <<Create>> MailCard(String,String,String,int)
++ String getbuttonmsg()
++ void PerformAction(Player)
+}
+class Model.cards.Charity {
++ <<Create>> Charity(String,String,String,int)
+}
+class Model.cards.PaytheNeighbor {
++ <<Create>> PaytheNeighbor(String,String,String,int)
++ void PerformAction(Player)
+}
+class Model.cards.DealCard {
+- int sellprice
++ <<Create>> DealCard(int,int,String,String)
++ int getSellprice()
++ void PerformAction(Player)
+}
+class Model.cards.Advertisement {
++ <<Create>> Advertisement(String,String,String,int)
++ void PerformAction(Player)
+}
+class Model.cards.Bill {
++ <<Create>> Bill(String,String,String,int)
++ void PerformAction(Player)
+}
+class Model.cards.MoveTo {
++ <<Create>> MoveTo(String,String,String)
+}
+abstract class Model.cards.Cards {
+- String ImageName
+- int cost
+- String message
+# String title
++ <<Create>> Cards(String,String,int)
++ String getTitle()
++ int getCost()
++ String getImageName()
++ String getMessage()
++ {abstract}void PerformAction(Player)
+}
+
+
+Model.cards.MailCard <|-- Model.cards.TakefromNeighbor
+Model.cards.Cards <|-- Model.cards.MailCard
+Model.cards.MailCard <|-- Model.cards.Charity
+Model.cards.MailCard <|-- Model.cards.PaytheNeighbor
+Model.cards.Cards <|-- Model.cards.DealCard
+Model.cards.MailCard <|-- Model.cards.Advertisement
+Model.cards.MailCard <|-- Model.cards.Bill
+Model.cards.MailCard <|-- Model.cards.MoveTo
+@enduml

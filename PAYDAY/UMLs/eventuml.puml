@@ -1,0 +1,17 @@
+@startuml
+class Model.Event.Crypto {
++ int EventAction(int)
+}
+class Model.Event.Football {
++ int EventAction(int)
+}
+abstract class Model.Event.Event {
+# int money
++ int getMoney()
++ {abstract}int EventAction(int)
+}
+
+
+Model.Event.Event <|-- Model.Event.Crypto
+Model.Event.Event <|-- Model.Event.Football
+@enduml

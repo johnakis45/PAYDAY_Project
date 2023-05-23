@@ -1,0 +1,66 @@
+@startuml
+class Controller.controller {
+- Player A
+- double scoreA
+- double scoreB
+- int maxmonths
+- int lotteryA
+- int lotteryB
+- Crypto c
+- Football f
+- boolean GameHasStarted
+- board board
+- interfaceUI gamewindow
+- String msg
+- boolean isLottery
+- boolean isRadio
++ <<Create>> controller()
++ Player GetA()
++ Player GetB()
++ board GetBoard()
++ void start_game()
++ void jackpot_winner(Player)
++ int getMonths()
++ void whostarts()
++ boolean isThisTheEnd()
+~ void isSunday(Player)
+~ void isThursday(Player)
++ void Move_player(ActionEvent)
++ void positionActions(Player,int)
+}
+class Controller.controller.listenforroll {
+~ dice dice1
+~ dice dice2
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listenforplayerdeal {
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listengetloan {
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listenendturn {
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listenformail {
+~ MailCard temp
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listenfordeal {
++ void actionPerformed(ActionEvent)
+}
+
+
+Controller.controller +.. Controller.controller.listenforroll
+Controller.ActionListener <|.. Controller.controller.listenforroll
+Controller.controller +.. Controller.controller.listenforplayerdeal
+Controller.ActionListener <|.. Controller.controller.listenforplayerdeal
+Controller.controller +.. Controller.controller.listengetloan
+Controller.ActionListener <|.. Controller.controller.listengetloan
+Controller.controller +.. Controller.controller.listenendturn
+Controller.ActionListener <|.. Controller.controller.listenendturn
+Controller.controller +.. Controller.controller.listenformail
+Controller.ActionListener <|.. Controller.controller.listenformail
+Controller.controller +.. Controller.controller.listenfordeal
+Controller.ActionListener <|.. Controller.controller.listenfordeal
+@enduml

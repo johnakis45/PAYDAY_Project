@@ -1,0 +1,446 @@
+@startuml
+class Model.cards.TakefromNeighbor {
++ <<Create>> TakefromNeighbor(String,String,String,int)
++ void PerformAction(Player)
+}
+class Model.Event.Football {
++ <<Create>> Football()
++ int EventAction(int)
+}
+class Model.stacks.StackOfDealCards {
+- ArrayList<DealCard> dealCards
++ <<Create>> StackOfDealCards()
++ void push(DealCard)
++ boolean isEmpty()
++ DealCard pop()
++ void Shuffle()
+}
+class View.PayDayUI {
+- ImageIcon image
+~ int choice
++ <<Create>> PayDayUI()
++ int getChoice()
+}
+class Model.cards.Bill {
++ <<Create>> Bill(String,String,String,int)
++ void PerformAction(Player)
+}
+class Model.stacks.StackOfCards {
+- ArrayList<Cards> rejectedcards
++ <<Create>> StackOfCards()
++ boolean isEmpty()
++ void createstacks(StackOfDealCards,StackOfMailCards)
++ void push(Cards)
+}
+abstract class Model.cards.MailCard {
+- String buttonmsg
++ <<Create>> MailCard(String,String,String,int)
++ String getbuttonmsg()
++ void PerformAction(Player)
+}
+class Model.position.radiocontest {
++ <<Create>> radiocontest(String,int)
++ boolean PerformAction(Player,int,int)
+}
+class Model.position.lottery {
++ <<Create>> lottery(String,int)
++ boolean PerformAction(Player,int,int)
+}
+class View.InfoBoxUI {
+~ JLabel info
+~ JTextField months
+~ controller g
++ <<Create>> InfoBoxUI(controller)
++ void refresh(String)
+}
+class View.lotteryUI {
+- Integer choice
++ <<Create>> lotteryUI(String)
++ int getChoice()
+}
+class View.chooserUI {
+- int choice
++ <<Create>> chooserUI(boolean,boolean)
++ int getChoice()
+}
+class test {
++ {static} void main(String[])
+}
+abstract class Model.position.OnePlayerPos {
++ <<Create>> OnePlayerPos(String,int)
+}
+class Model.jackpot {
+- int money
++ <<Create>> jackpot()
++ int getMoney()
++ void addMoney(int)
++ void reset()
+}
+class Controller.controller {
+- Player A
+- double scoreA
+- double scoreB
+- int maxmonths
+- int lotteryA
+- int lotteryB
+- Crypto c
+- Football f
+- boolean GameHasStarted
+- board board
+- interfaceUI gamewindow
+- String msg
+- boolean isLottery
+- boolean isRadio
++ <<Create>> controller()
++ Player GetA()
++ Player GetB()
++ board GetBoard()
++ void start_game()
++ void jackpot_winner(Player)
++ int getMonths()
++ void whostarts()
++ boolean isThisTheEnd()
+~ void isSunday(Player)
+~ void isThursday(Player)
++ void Move_player(ActionEvent)
++ void positionActions(Player,int)
+}
+class Controller.controller.listenforroll {
+~ dice dice1
+~ dice dice2
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listenforplayerdeal {
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listengetloan {
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listenendturn {
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listenformail {
+~ MailCard temp
++ void actionPerformed(ActionEvent)
+}
+class Controller.controller.listenfordeal {
++ void actionPerformed(ActionEvent)
+}
+abstract class Model.Event.Event {
+# int money
++ <<Create>> Event()
++ int getMoney()
++ {abstract}int EventAction(int)
+}
+class Model.position.PayDayPosition {
++ <<Create>> PayDayPosition(String)
++ void performAction(Player)
+}
+class View.MailCardUI {
++ <<Create>> MailCardUI(String,String,String,String)
+}
+class View.FootballUI {
+- ImageIcon image
+~ int choice
++ <<Create>> FootballUI()
++ <<Create>> FootballUI(boolean)
++ int getChoice()
+}
+class Model.dice {
+- int number
+- boolean isRolled
++ <<Create>> dice()
++ boolean getRolled()
++ void setRolled(boolean)
++ int getNumber()
++ void roll()
+}
+class Model.stacks.StackOfMailCards {
+- ArrayList<MailCard> mailCards
++ <<Create>> StackOfMailCards()
++ void push(MailCard)
++ boolean isEmpty()
++ MailCard pop()
++ void Shuffle()
+}
+abstract class Model.position.Position {
+- int index
+- String image
+- String dayname
++ <<Create>> Position(String,int)
++ void setIndex(int)
++ int getIndex()
++ String getImage()
++ void setDay(String)
++ String getDay()
++ boolean isSunday()
++ boolean isThursday()
++ {abstract}void performAction(Player)
+}
+class View.CryptoUI {
+- ImageIcon image
+- int choice
++ <<Create>> CryptoUI()
++ <<Create>> CryptoUI(int)
++ int getChoice()
+}
+abstract class Model.position.TwoPlayerPos {
++ <<Create>> TwoPlayerPos(String,int)
++ {abstract}boolean PerformAction(Player,int,int)
+}
+class Model.board {
+~ ClassLoader cldr
+~ String[][] mailCards
+~ String[][] dealCards
++ Position[] tablo
++ jackpot j
++ StackOfCards rejected
++ StackOfMailCards mailstack
++ StackOfDealCards dealstack
++ <<Create>> board()
++ void stack_initializer()
++ void Position_initializer()
+- void Position_randomizer(Position[])
++ void readFile(String,String)
+}
+class View.interfaceUI {
+~ controller g
+- Dimension screenSize
+- int width
+- int height
+~ JLabel pawnA
+~ JLabel pawnB
+~ PaneOver panel
+~ JDesktopPane[] positions
+~ JButton mailbutton
+~ JButton dealbutton
+~ JDesktopPane table
+~ ImageIcon jackpot
+~ JTextField jackpotprice
++ PlayerUI player1
++ PlayerUI player2
+~ InfoBoxUI info
++ <<Create>> interfaceUI(controller)
++ boolean isEnabled()
++ void setEnableMail(boolean)
++ void setEnableDeal(boolean)
++ void menu_creator()
++ void init_table()
++ void init_players()
++ void init_infobox()
++ void refresh_infobox(String)
++ void changeposition(int,int,boolean)
++ void paintJackpot(int)
++ void addmailbuttonaction(ActionListener)
++ void adddealbuttonaction(ActionListener)
++ void addnewgameaction(ActionListener)
+~ {static} ImageIcon scaleimage(String,int,int)
+}
+class View.interfaceUI.PaneOver {
+- Image image
++ <<Create>> PaneOver(Image)
++ void paintComponent(Graphics)
+}
+class View.SellCardUI {
++ <<Create>> SellCardUI(String,int)
+}
+class Model.position.StartPosition {
++ <<Create>> StartPosition(String)
++ void performAction(Player)
+}
+class Model.cards.MoveTo {
++ <<Create>> MoveTo(String,String,String)
+}
+class View.winUI {
++ <<Create>> winUI(String,boolean)
+}
+class Model.cards.Charity {
++ <<Create>> Charity(String,String,String,int)
+}
+class View.PlayerUI {
+~ controller g
+~ JButton rolldice
+~ JLabel playername
+~ JTextField moneyinfo
+~ ImageIcon diceicon
+~ JLabel dicelabel
++ <<Create>> PlayerUI(controller,int,int,boolean)
++ void refresh(boolean)
++ JButton getDicebt()
++ JButton getmydealsbt()
++ void refreshdice(int)
++ void disablebuttons()
++ void enablebuttons()
++ void setdice(boolean)
++ void setMyDeals(boolean)
++ void enableEnd(boolean)
++ void addrollaction(ActionListener)
++ void addplayerdealaction(ActionListener)
++ void addgetloanaction(ActionListener)
++ void addendturnaction(ActionListener)
+}
+class Model.cards.Advertisement {
++ <<Create>> Advertisement(String,String,String,int)
++ void PerformAction(Player)
+}
+class View.DealCardUI {
+- boolean choice
++ <<Create>> DealCardUI(String,String,int,int)
++ boolean getchoice()
+}
+class Model.position.casino {
+- boolean win
++ <<Create>> casino(String,int)
++ void PerformAction(Player,jackpot)
++ boolean isWin(int)
+}
+abstract class Model.cards.Cards {
+- String ImageName
+- int cost
+- String message
+# String title
++ <<Create>> Cards(String,String,int)
++ String getTitle()
++ int getCost()
++ String getImageName()
++ String getMessage()
++ {abstract}void PerformAction(Player)
+}
+class Model.position.Buyer {
++ <<Create>> Buyer(String,int)
+}
+class Model.Event.Crypto {
++ <<Create>> Crypto()
++ int EventAction(int)
+}
+class Model.Player {
+- double money
+- double loan
+- int bills
+- ArrayList<DealCard> mydealcards
+- ArrayList<Bill> mybillcards
+- int currentpos
+- int months
+- Player opponent
+- dice mydice
+- boolean turn
+- boolean first
+- boolean finish
+- boolean wait
+- String name
++ <<Create>> Player(String,boolean)
++ int getBills()
++ double getloan()
++ double getMoney()
++ void setBills(int)
++ void setLoan(double)
++ void setMoney(double)
++ void AddDealCard(DealCard,boolean)
++ void AddBillCard(Bill)
++ void AddMailCard(MailCard)
++ void clearDeals()
++ void clearBills()
++ String getName()
++ DealCard SellCard()
++ void SellCardAction()
++ void setMonths(int)
++ int getMonths()
++ void setOpponent(Player)
++ Player getOpponent()
++ boolean hasMoney(double)
++ boolean hasLoan()
++ boolean hasBills()
++ boolean hasCards()
++ dice getMydice()
++ int getCurrentpos()
++ void setCurrentpos(int)
++ boolean getTurn()
++ void setTurn(boolean)
++ boolean isFinish()
++ void setFinish(boolean)
++ boolean isWait()
++ void setWait(boolean)
+}
+class Model.cards.DealCard {
+- int sellprice
++ <<Create>> DealCard(int,int,String,String)
++ int getSellprice()
++ void PerformAction(Player)
+}
+class View.loanUI {
+- ImageIcon image
+- Integer loanmoney
++ <<Create>> loanUI()
++ Integer getLoanmoney()
+}
+abstract class Model.position.DicePosition {
++ <<Create>> DicePosition(String,int)
++ void performAction(Player)
+}
+class Model.position.CardPosition {
+- boolean drawonecard
+- boolean deal
++ <<Create>> CardPosition(String,int,boolean,boolean)
++ boolean getOneCard()
++ boolean isDeal()
++ void performAction(Player)
+}
+class Model.cards.PaytheNeighbor {
++ <<Create>> PaytheNeighbor(String,String,String,int)
++ void PerformAction(Player)
+}
+class Model.position.Sale {
++ <<Create>> Sale(String,int)
++ void performAction(Player)
+}
+class Model.position.sweepstakes {
++ <<Create>> sweepstakes(String,int)
++ void performAction(Player)
+}
+class View.nameUI {
+- String name
++ <<Create>> nameUI(boolean)
++ String getname()
+}
+
+
+Model.cards.MailCard <|-- Model.cards.TakefromNeighbor
+Model.Event.Event <|-- Model.Event.Football
+Model.cards.MailCard <|-- Model.cards.Bill
+Model.cards.Cards <|-- Model.cards.MailCard
+Model.position.TwoPlayerPos <|-- Model.position.radiocontest
+Model.position.TwoPlayerPos <|-- Model.position.lottery
+View.JDesktopPane <|-- View.InfoBoxUI
+Model.position.DicePosition <|-- Model.position.OnePlayerPos
+Controller.controller +.. Controller.controller.listenforroll
+Controller.ActionListener <|.. Controller.controller.listenforroll
+Controller.controller +.. Controller.controller.listenforplayerdeal
+Controller.ActionListener <|.. Controller.controller.listenforplayerdeal
+Controller.controller +.. Controller.controller.listengetloan
+Controller.ActionListener <|.. Controller.controller.listengetloan
+Controller.controller +.. Controller.controller.listenendturn
+Controller.ActionListener <|.. Controller.controller.listenendturn
+Controller.controller +.. Controller.controller.listenformail
+Controller.ActionListener <|.. Controller.controller.listenformail
+Controller.controller +.. Controller.controller.listenfordeal
+Controller.ActionListener <|.. Controller.controller.listenfordeal
+Model.position.Position <|-- Model.position.PayDayPosition
+Model.position.DicePosition <|-- Model.position.TwoPlayerPos
+View.JFrame <|-- View.interfaceUI
+View.interfaceUI +.. View.interfaceUI.PaneOver
+View.JLayeredPane <|-- View.interfaceUI.PaneOver
+Model.position.Position <|-- Model.position.StartPosition
+Model.cards.MailCard <|-- Model.cards.MoveTo
+Model.cards.MailCard <|-- Model.cards.Charity
+View.JDesktopPane <|-- View.PlayerUI
+Model.cards.MailCard <|-- Model.cards.Advertisement
+Model.position.OnePlayerPos <|-- Model.position.casino
+Model.position.OnePlayerPos <|-- Model.position.Buyer
+Model.Event.Event <|-- Model.Event.Crypto
+Model.cards.Cards <|-- Model.cards.DealCard
+Model.position.Position <|-- Model.position.DicePosition
+Model.position.Position <|-- Model.position.CardPosition
+Model.cards.MailCard <|-- Model.cards.PaytheNeighbor
+Model.position.OnePlayerPos <|-- Model.position.Sale
+Model.position.OnePlayerPos <|-- Model.position.sweepstakes
+@enduml
